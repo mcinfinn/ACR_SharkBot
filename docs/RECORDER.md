@@ -106,3 +106,34 @@ Run the minimal control loop scaffold:
 ```powershell
 py -3.12 -m acr_sharkbot.control_loop --seconds 5
 ```
+
+## Drive Loop Scaffold
+
+Run real-time capture + control output (fixed steer policy scaffold):
+
+```powershell
+py -3.12 -m acr_sharkbot.drive_loop --fps 20 --left 640 --top 360 --width 640 --height 360 --throttle 0.5 --brake 0.0
+```
+
+Capture full primary monitor:
+
+```powershell
+py -3.12 -m acr_sharkbot.drive_loop --full-monitor --seconds 30
+```
+
+Dry run without gamepad output (prints controls only):
+
+```powershell
+py -3.12 -m acr_sharkbot.drive_loop --full-monitor --no-gamepad --seconds 10
+```
+
+Hotkeys while running:
+
+- `p`: pause/resume control outputs (resets controller when pausing)
+- `q`: quit gracefully
+
+If capture dependencies are missing, install:
+
+```powershell
+pip install mss pillow opencv-python
+```
