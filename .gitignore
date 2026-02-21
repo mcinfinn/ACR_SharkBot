@@ -1,0 +1,42 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# ---------- Build / packaging ----------
+build/
+dist/
+*.egg-info/
+
+# ---------- IDE / editor ----------
+.vscode/
+.idea/
+
+# ---------- OS junk ----------
+.DS_Store
+Thumbs.db
+
+# ---------- Logs ----------
+*.log
+
+# ---------- Project data (IMPORTANT) ----------
+runs/
+data/
+datasets/
+checkpoints/
+models/
+outputs/
+*.csv
+*.jpg
+*.jpeg
+*.png
+*.mp4
+
+# ---------- Temporary ----------
+*.tmp
+*.bak
