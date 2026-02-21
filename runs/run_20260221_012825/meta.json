@@ -1,0 +1,32 @@
+{
+  "start_time": "2026-02-21T01:28:25.955553+00:00",
+  "physics_maps": {
+    "physics": "Local\\acpmf_physics"
+  },
+  "physics_struct_size": 800,
+  "telemetry_hz": 100.0,
+  "frame_fps": 20.0,
+  "jpeg_quality": 85,
+  "full_monitor": false,
+  "capture_region": {
+    "left": 3520,
+    "top": 540,
+    "width": 640,
+    "height": 360
+  },
+  "primary_monitor": {
+    "left": 2560,
+    "top": 0,
+    "width": 2560,
+    "height": 1440
+  },
+  "output_files": {
+    "telemetry_csv": "telemetry.csv",
+    "frames_csv": "frames.csv",
+    "frames_dir": "frames"
+  },
+  "end_time": "2026-02-21T01:31:18.051239+00:00",
+  "duration_sec": 172.095,
+  "telemetry_rows": 4388,
+  "frame_rows": 3434
+}
