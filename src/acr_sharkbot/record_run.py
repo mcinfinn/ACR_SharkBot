@@ -146,6 +146,7 @@ class PhysicsSharedMemory:
     def __init__(self, map_name: str, struct_size: int):
         self.map_name = map_name
         self.struct_size = struct_size
+        self._buf = Physics()
         self.view: MappedView | None = None
         self.connected = False
         self.next_retry_at = 0.0
@@ -179,8 +180,8 @@ class PhysicsSharedMemory:
         if self.view is None:
             return None
         try:
-            raw = C.string_at(self.view.addr, self.struct_size)
-            return Physics.from_buffer_copy(raw)
+            C.memmove(C.addressof(self._buf), self.view.addr, self.struct_size)
+            return self._buf
         except Exception:
             self.close()
             self.next_retry_at = now + 1.0
@@ -398,6 +399,15 @@ def is_active(sample: TelemetrySample, args: argparse.Namespace) -> bool:
     )
 
 
+def is_inactive_for_stop(sample: TelemetrySample, args: argparse.Namespace) -> bool:
+    return (
+        sample.gas <= args.gas_th
+        and sample.brake <= args.brake_th
+        and abs(sample.steer) <= args.steer_th
+        and sample.speed_kmh <= args.speed_th
+    )
+
+
 def capture_frame_sample(sct: Any, image_module: Any, region: dict[str, int], quality: int, t_ms: float) -> FrameSample:
     raw = sct.grab(region)
     image = image_module.frombytes("RGB", raw.size, raw.rgb)
@@ -609,11 +619,12 @@ def run(args: argparse.Namespace) -> int:
                         segment_writer.write_telemetry(sample)
 
                     if segment_writer is not None:
+                        inactive_for_stop = is_inactive_for_stop(sample, args)
                         if not armed:
                             if pending_stop_deadline_ms is None:
                                 pending_stop_deadline_ms = sample.t_ms + post_roll_ms
                                 pending_stop_reason = "disarmed"
-                        elif active_now:
+                        elif not inactive_for_stop:
                             inactive_since_ms = None
                             pending_stop_deadline_ms = None
                         else:

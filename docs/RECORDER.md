@@ -9,11 +9,13 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-2. Install dependencies:
+2. Install in editable mode:
 
 ```powershell
-pip install mss pillow
+pip install -e .
 ```
+
+This project uses a `src/` layout; editable install keeps `acr_sharkbot` imports bound to `src/acr_sharkbot`.
 
 ## Run
 
@@ -45,9 +47,11 @@ Hotkeys while running:
 
 Each run creates:
 
-`runs/run_YYYYMMDD_HHMMSS/`
+`runs/session_YYYYMMDD_HHMMSS/`
 
-- `telemetry.csv`
-- `frames.csv`
-- `frames/frame_000000.jpg`, `frames/frame_000001.jpg`, ...
-- `meta.json`
+- `session_meta.json`
+- `segment_0001/`
+- `segment_0001/telemetry.csv`
+- `segment_0001/frames.csv`
+- `segment_0001/frames/frame_000000.jpg`, `segment_0001/frames/frame_000001.jpg`, ...
+- `segment_0001/meta.json`
