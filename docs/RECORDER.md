@@ -84,3 +84,25 @@ Build a dataset index from recorded sessions:
 ```powershell
 py -3.12 -m acr_sharkbot.index_runs --runs-dir runs --out runs/index.json
 ```
+
+## Virtual Gamepad Output (Windows)
+
+Install the ViGEmBus driver so Windows can host an Xbox 360 virtual controller, then install `vgamepad`:
+
+```powershell
+pip install vgamepad
+```
+
+Test virtual controller output:
+
+```powershell
+py -3.12 -m acr_sharkbot.gamepad_test --seconds 5
+```
+
+## Control Loop Test
+
+Run the minimal control loop scaffold:
+
+```powershell
+py -3.12 -m acr_sharkbot.control_loop --seconds 5
+```
